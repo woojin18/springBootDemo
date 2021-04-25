@@ -47,7 +47,7 @@ public class UserProfileController {
 	@GetMapping("/user/all")
 	public List<UserProfile> getUserProfileList() {
 		return new ArrayList<UserProfile>(userMap.values());
-		//return mapper.getUserProfileList();
+		//return mapper.getUserProfileList(); 
 	}
 	
 	@PostMapping("/user/{id}")
