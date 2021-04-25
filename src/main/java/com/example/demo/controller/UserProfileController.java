@@ -1,11 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,15 +16,6 @@ import com.example.demo.model.UserProfile;
 public class UserProfileController {
 
 	private UserProfileMapper mapper;
-	private Map<String,UserProfile>userMap;
-	
-	@PostConstruct
-	public void init() {
-		userMap = new HashMap<String, UserProfile>();
-		userMap.put("1", new UserProfile("1","홍길동","111111","구로"));
-	}
-	
-	
 	
 	public UserProfileController(UserProfileMapper mapper) {
 		this.mapper = mapper;
@@ -37,8 +23,7 @@ public class UserProfileController {
 	
 	@GetMapping("/user/{id}")
 	public UserProfile getUserProfile(@PathVariable("id") String id) {
-		return userMap.get(id);
-		//return mapper.getUserProfile(id);
+		return mapper.getUserProfile(id);
 	}
 	
 	@GetMapping("/user/all")
