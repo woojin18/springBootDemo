@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +30,8 @@ public class UserProfileController {
 	public void init() {
 		userMap = new HashMap<String, UserProfile>();
 		userMap.put("1", new UserProfile("1","홍길동","111111","구로"));
+		userMap.put("2", new UserProfile("2","연민호","222222","봉천"));
 	}
-	
 	
 	
 	public UserProfileController(UserProfileMapper mapper) {
@@ -45,15 +46,16 @@ public class UserProfileController {
 	
 	@GetMapping("/user/all")
 	public List<UserProfile> getUserProfileList() {
-		return mapper.getUserProfileList();
+		return new ArrayList<UserProfile>(userMap.values());
+		//return mapper.getUserProfileList();
 	}
 	
-	@PutMapping("/user/{id}")
+	@PostMapping("/user/{id}")
 	public void putUserProfile(@PathVariable("id") String id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
 		mapper.insertUserProfile(id, name, phone, address);
 	}
 	
-	@PostMapping("/user/{id}")
+	@PutMapping("/user/{id}")
 	public void postUserProfile(@PathVariable("id") String id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
 		mapper.updateUserProfile(id, name, phone, address);
 	}
