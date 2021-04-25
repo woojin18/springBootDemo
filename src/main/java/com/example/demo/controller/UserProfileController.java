@@ -34,7 +34,7 @@ public class UserProfileController {
 	
 	
 	public UserProfileController(UserProfileMapper mapper) {
-		this.mapper = mapper;
+		this.mapper = mapper; 
 	}
 	
 	@GetMapping("/user/{id}")
