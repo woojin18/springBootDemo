@@ -46,13 +46,17 @@ public class UserProfileController {
 	
 	@GetMapping("/user/all")
 	public List<UserProfile> getUserProfileList() {
+		System.out.println("반응: "+new ArrayList<UserProfile>(userMap.values()));
 		return new ArrayList<UserProfile>(userMap.values());
 		//return mapper.getUserProfileList(); 
 	}
 	
 	@PostMapping("/user/{id}")
 	public void putUserProfile(@PathVariable("id") String id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
-		mapper.insertUserProfile(id, name, phone, address);
+		UserProfile userProfile =  new UserProfile(id, name, phone, address);
+		userMap.put(id, userProfile);
+		
+		//mapper.insertUserProfile(id, name, phone, address);
 	}
 	
 	@PutMapping("/user/{id}")
